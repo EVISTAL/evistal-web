@@ -1,0 +1,303 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'system-ui', 'Avenir', 'Helvetica', 'Arial', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Light Mode Colors */
+:root {
+  --evistal-white: #FFFFFF;
+  --evistal-gray-light: #E5E5E5;
+  --evistal-gray: #A0A0A0;
+  --evistal-black: #000000;
+}
+
+/* Dark Mode Colors - Tam tersi */
+.dark {
+  --evistal-white: #000000;  /* Beyaz -> Siyah */
+  --evistal-gray-light: #1a1a1a;  /* Açık gri -> Koyu siyah */
+  --evistal-gray: #666666;  /* Gri -> Orta gri */
+  --evistal-black: #ffffff;  /* Siyah -> Beyaz */
+}
+
+/* Apply colors using CSS variables */
+.bg-evistal-white {
+  background-color: var(--evistal-white);
+}
+
+.bg-evistal-gray-light {
+  background-color: var(--evistal-gray-light);
+}
+
+.text-evistal-black {
+  color: var(--evistal-black);
+}
+
+.text-evistal-gray {
+  color: var(--evistal-gray);
+}
+
+.border-evistal-gray-light {
+  border-color: var(--evistal-gray-light);
+}
+
+/* Dark mode specific styles - Tam tersi */
+.dark body {
+  background-color: #000000;  /* Tam siyah arka plan */
+  color: #ffffff;  /* Beyaz metin */
+}
+
+.dark .min-h-screen {
+  background-color: #000000;  /* Tam siyah arka plan */
+}
+
+.dark header {
+  background-color: rgba(0, 0, 0, 0.95);  /* Siyah header */
+  border-color: #333333;  /* Koyu gri border */
+}
+
+.dark .bg-evistal-black {
+  background-color: #ffffff;  /* Siyah buton -> Beyaz */
+  color: #000000;  /* Beyaz metin -> Siyah */
+}
+
+.dark .hover\:bg-evistal-gray:hover {
+  background-color: #333333;  /* Koyu gri hover */
+}
+
+/* Dark mode için özel gradient */
+.dark .gradient-text {
+  background: linear-gradient(135deg, #ffffff, #cccccc) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* Dark mode için tüm elementler */
+.dark .bg-evistal-white {
+  background-color: #000000 !important;  /* Beyaz arka plan -> Siyah */
+}
+
+.dark .bg-evistal-gray-light {
+  background-color: #1a1a1a !important;  /* Açık gri -> Koyu siyah */
+}
+
+.dark .text-evistal-black {
+  color: #ffffff !important;  /* Siyah metin -> Beyaz */
+}
+
+.dark .text-evistal-gray {
+  color: #cccccc !important;  /* Gri metin -> Açık gri */
+}
+
+.dark .border-evistal-gray-light {
+  border-color: #333333 !important;  /* Açık gri border -> Koyu gri */
+}
+
+/* Dark mode için özel hover efektleri */
+.dark .hover-lift:hover {
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .hover-3d:hover {
+  box-shadow: 
+    0 20px 40px rgba(255, 255, 255, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Force icon color to black on white circles in dark mode */
+.dark .icon-on-light {
+  color: #000 !important;
+}
+
+/* Hero bölümü için dark mode - En güçlü kurallar */
+.dark #hero {
+  background: linear-gradient(135deg, #000000, #1a1a1a) !important;
+}
+
+.dark #hero h1 {
+  color: #ffffff !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-clip: unset !important;
+}
+
+.dark #hero p {
+  color: #cccccc !important;
+}
+
+.dark #hero button {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+.dark #hero button:hover {
+  background-color: #cccccc !important;
+}
+
+/* Tüm gradient text'leri dark mode'da düz beyaz yap */
+.dark .gradient-text {
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-clip: unset !important;
+  color: #ffffff !important;
+}
+
+/* Product detail hero dark override */
+.dark #product-hero {
+  background: linear-gradient(135deg, #000000, #111111) !important;
+}
+
+/* Gradient text effect */
+.gradient-text {
+  background: linear-gradient(135deg, var(--evistal-black), var(--evistal-gray));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Custom Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0,0,0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -30px, 0);
+  }
+  70% {
+    transform: translate3d(0, -15px, 0);
+  }
+  90% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-fadeInLeft {
+  animation: fadeInLeft 0.6s ease-out;
+}
+
+.animate-fadeInRight {
+  animation: fadeInRight 0.6s ease-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Smooth transitions for all interactive elements */
+button, a, [role="button"] {
+  transition: all 0.3s ease;
+}
+
+/* Enhanced hover effects */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 3D Hover Effects */
+.hover-3d {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.hover-3d:hover {
+  transform: translateY(-8px) rotateX(5deg) rotateY(5deg);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
