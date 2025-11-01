@@ -5,7 +5,7 @@ interface ProductDetailProps {
   onNavigateProducts?: () => void
 }
 
-const ProductDetail: React.FC<ProductDetailProps> = ({ onBack, onNavigateProducts }) => {
+const ProductDetail: React.FC<ProductDetailProps> = ({ onBack }) => {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
