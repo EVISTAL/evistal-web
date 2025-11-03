@@ -29,6 +29,10 @@ function App() {
 
   const showProductDetail = () => {
     setCurrentPage('product')
+    // Sayfa değiştiğinde en üste scroll yap
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'auto' })
+    }, 0)
   }
 
   const showHome = () => {
@@ -52,7 +56,13 @@ function App() {
   }
 
   if (currentPage === 'product') {
-    return <ProductDetail onBack={showHome} />
+    return (
+      <ThemeProvider>
+        <ToastProvider>
+          <ProductDetail onBack={showHome} />
+        </ToastProvider>
+      </ThemeProvider>
+    )
   }
 
   if (currentPage === 'products') {
