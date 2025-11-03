@@ -84,15 +84,6 @@ const Model: React.FC<{ path: string }> = ({ path }) => {
   )
 }
 
-// Yüklenme animasyonu
-const LoadingSpinner: React.FC = () => {
-  return (
-    <div className="w-full h-full flex items-center justify-center">
-      <div className="w-16 h-16 border-4 border-evistal-gray-light border-t-evistal-black rounded-full animate-spin"></div>
-    </div>
-  )
-}
-
 const ModelViewer: React.FC<ModelViewerProps> = ({ modelPath, className = '' }) => {
   return (
     <div className={`w-full ${className}`} style={{ height: '80vh', minHeight: '700px', backgroundColor: 'transparent' }}>
