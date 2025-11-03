@@ -25,16 +25,24 @@ const Particles: React.FC = () => {
       canvas.height = window.innerHeight
     }
 
-    const createParticle = () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5,
-      size: Math.random() * 2 + 1,
-      opacity: Math.random() * 0.5 + 0.1
-    })
+    const createParticle = () => {
+      // Canvas boyutu yerine window boyutunu kullan - daha güvenilir
+      const width = canvas.width || window.innerWidth
+      const height = canvas.height || window.innerHeight
+      return {
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        size: Math.random() * 2 + 1,
+        opacity: Math.random() * 0.5 + 0.1
+      }
+    }
 
-    // Initialize particles
+    // Önce canvas boyutunu ayarla
+    resizeCanvas()
+
+    // Sonra partikülleri oluştur - canvas boyutu kesinlikle ayarlanmış olacak
     for (let i = 0; i < 50; i++) {
       particles.push(createParticle())
     }
@@ -88,14 +96,24 @@ const Particles: React.FC = () => {
       animationId = requestAnimationFrame(animate)
     }
 
-    resizeCanvas()
+    // Canvas zaten resizeCanvas() ile ayarlandı
     animate()
 
-    window.addEventListener('resize', resizeCanvas)
+    // Resize event'inde partikülleri yeniden dağıt
+    const handleResize = () => {
+      resizeCanvas()
+      // Partikülleri yeni canvas boyutuna göre yeniden dağıt
+      particles.forEach(particle => {
+        particle.x = Math.random() * canvas.width
+        particle.y = Math.random() * canvas.height
+      })
+    }
+
+    window.addEventListener('resize', handleResize)
 
     return () => {
       cancelAnimationFrame(animationId)
-      window.removeEventListener('resize', resizeCanvas)
+      window.removeEventListener('resize', handleResize)
     }
   }, [])
 
