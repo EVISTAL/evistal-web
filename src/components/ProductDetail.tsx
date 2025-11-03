@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import ModelViewer from './ModelViewer'
+import { useTheme } from '../contexts/ThemeContext'
 
 interface ProductDetailProps {
   onBack: () => void
@@ -7,9 +9,12 @@ interface ProductDetailProps {
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ onBack }) => {
   const [isVisible, setIsVisible] = useState(false)
+  const { isDark, toggleTheme } = useTheme()
 
   useEffect(() => {
     setIsVisible(true)
+    // Sayfa açıldığında her zaman en üste scroll yap
+    window.scrollTo({ top: 0, behavior: 'auto' })
   }, [])
 
   return (
@@ -24,19 +29,38 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ onBack }) => {
               onClick={onBack}
             >
               {/* EVISTAL Logo - E+V Design */}
-              <div className="w-8 h-8 mr-3 relative">
+              <div className="w-8 h-8 mr-3 relative text-evistal-black dark:text-white">
                 <svg viewBox="0 0 32 32" className="w-full h-full">
                   {/* E harfi - Sol taraf */}
-                  <path d="M4 4 L4 28 L8 28 L8 20 L20 20 L20 16 L8 16 L8 12 L20 12 L20 8 L8 8 L8 4 Z" fill="#000000"/>
+                  <path d="M4 4 L4 28 L8 28 L8 20 L20 20 L20 16 L8 16 L8 12 L20 12 L20 8 L8 8 L8 4 Z" fill="currentColor"/>
                   {/* V harfi - Sağ taraf */}
-                  <path d="M24 4 L28 4 L24 20 L20 20 Z" fill="#000000"/>
-                  <path d="M20 20 L24 20 L20 28 L16 28 Z" fill="#000000"/>
+                  <path d="M24 4 L28 4 L24 20 L20 20 Z" fill="currentColor"/>
+                  <path d="M20 20 L24 20 L20 28 L16 28 Z" fill="currentColor"/>
                 </svg>
               </div>
               <span className="text-2xl font-bold text-evistal-black">EVISTAL</span>
             </div>
 
-          {/* Back Button */}
+          {/* Right side buttons */}
+          <div className="flex items-center space-x-4">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="text-evistal-black hover:text-evistal-gray transition-colors duration-200 p-2 rounded-lg hover:bg-evistal-gray-light"
+              aria-label="Tema değiştir"
+            >
+              {isDark ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              )}
+            </button>
+            
+            {/* Back Button */}
             <button
               onClick={onBack}
               className="flex items-center text-evistal-black hover:text-evistal-gray transition-colors duration-200"
@@ -46,6 +70,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ onBack }) => {
               </svg>
               Ana Sayfaya Dön
             </button>
+          </div>
           </div>
         </div>
       </header>
@@ -63,10 +88,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ onBack }) => {
               }`}
             >
               <div className="text-center mb-16">
-                <div className="w-32 h-32 mx-auto mb-8 bg-evistal-black rounded-full flex items-center justify-center">
-                  <svg className="w-16 h-16 text-evistal-white dark:text-black" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                  </svg>
+                {/* 3D Model Viewer */}
+                <div className="w-full mb-8 px-4">
+                  <ModelViewer modelPath="/models/1kum1kasa1yeni1-Body.glb" />
                 </div>
                 <h1 className="text-5xl sm:text-6xl font-bold text-evistal-black mb-6 gradient-text">
                   Smart Humidifier

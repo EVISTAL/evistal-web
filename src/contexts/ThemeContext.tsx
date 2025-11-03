@@ -20,17 +20,29 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [isDark, setIsDark] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('evistal-theme')
-      return saved ? JSON.parse(saved) : false
-    }
-    return false
-  })
+  // Her zaman light mode'da başla (localStorage'dan okuma)
+  const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      localStorage.setItem('evistal-theme', JSON.stringify(isDark))
+      // Scroll restoration'ı kapat - sayfa her zaman en üstten açılsın
+      if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual'
+      }
+      
+      // Dark mode class'ını kaldır - her zaman light mode
+      const root = document.documentElement
+      root.classList.remove('dark')
+      
+      // Sayfayı en üste al
+      window.scrollTo({ top: 0, behavior: 'auto' })
+    }
+  }, [])
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Tema değiştiğinde localStorage'a kaydet (kullanıcı manuel değiştirdiğinde)
+      // Ama sayfa yüklendiğinde her zaman light mode'da başla
       const root = document.documentElement
       
       if (isDark) {
