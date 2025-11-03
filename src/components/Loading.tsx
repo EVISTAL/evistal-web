@@ -11,11 +11,11 @@ const Loading: React.FC = () => {
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-8 h-8 relative">
-              <svg viewBox="0 0 32 32" className="w-full h-full text-evistal-black">
-                <path d="M4 4 L4 28 L8 28 L8 20 L20 20 L20 16 L8 16 L8 12 L20 12 L20 8 L8 8 L8 4 Z" fill="currentColor"/>
-                <path d="M24 4 L28 4 L24 20 L20 20 Z" fill="currentColor"/>
-                <path d="M20 20 L24 20 L20 28 L16 28 Z" fill="currentColor"/>
-              </svg>
+              <img 
+                src="/logo.png" 
+                alt="EVISTAL Logo" 
+                className="w-full h-full object-contain"
+              />
             </div>
           </div>
         </div>

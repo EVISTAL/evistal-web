@@ -28,15 +28,13 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ onBack }) => {
               className="flex items-center cursor-pointer"
               onClick={onBack}
             >
-              {/* EVISTAL Logo - E+V Design */}
-              <div className="w-8 h-8 mr-3 relative text-evistal-black dark:text-white">
-                <svg viewBox="0 0 32 32" className="w-full h-full">
-                  {/* E harfi - Sol taraf */}
-                  <path d="M4 4 L4 28 L8 28 L8 20 L20 20 L20 16 L8 16 L8 12 L20 12 L20 8 L8 8 L8 4 Z" fill="currentColor"/>
-                  {/* V harfi - Sağ taraf */}
-                  <path d="M24 4 L28 4 L24 20 L20 20 Z" fill="currentColor"/>
-                  <path d="M20 20 L24 20 L20 28 L16 28 Z" fill="currentColor"/>
-                </svg>
+              {/* EVISTAL Logo */}
+              <div className="w-8 h-8 mr-3 relative">
+                <img 
+                  src="/logo.png" 
+                  alt="EVISTAL Logo" 
+                  className="w-full h-full object-contain"
+                />
               </div>
               <span className="text-2xl font-bold text-evistal-black">EVISTAL</span>
             </div>
